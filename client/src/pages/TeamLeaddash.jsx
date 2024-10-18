@@ -12,7 +12,9 @@ const TLDashboard = () => {
   const [selectedWorkspace, setSelectedWorkspace] = useState(null);
   const [accessDenied, setAccessDenied] = useState(false);
   const userId = localStorage.getItem("userId"); // Assuming userId is stored in localStorage
-
+  const handleLoginAsOtherPrivilege = () => {
+    navigate("/login");
+  };
   const fetchWorkspaces = useCallback(async () => {
     try {
       const response = await axios.get(
@@ -69,6 +71,14 @@ const TLDashboard = () => {
         )}
       </div>
       <div className="flex justify-center"></div>
+      <div className="flex justify-center">
+        <button
+          onClick={handleLoginAsOtherPrivilege}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Login as Other Privilege
+        </button>
+      </div>
     </div>
   );
 };

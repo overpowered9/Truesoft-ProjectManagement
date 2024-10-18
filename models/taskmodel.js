@@ -3,18 +3,9 @@ const Schema = mongoose.Schema;
 
 const TaskSchema = new Schema(
   {
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-    },
-    assignedTo: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    title: { type: String, required: true },
+    description: { type: String },
+    assignedTo: { type: Schema.Types.ObjectId, ref: "User", required: true },
     workspace: {
       type: Schema.Types.ObjectId,
       ref: "Workspace",
@@ -22,23 +13,15 @@ const TaskSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["Pending", "In Progress", "Completed"],
-      default: "Pending",
+      enum: ["pending", "in-progress", "completed"],
+      default: "pending",
     },
-    deadline: {
-      type: Date,
-    },
+    deadline: { type: Date },
     timerLogs: [
       {
-        start: {
-          type: Date,
-        },
-        end: {
-          type: Date,
-        },
-        duration: {
-          type: Number, // Duration in minutes or seconds
-        },
+        startTime: { type: Date },
+        endTime: { type: Date },
+        duration: { type: Number }, // Duration in milliseconds
       },
     ],
   },

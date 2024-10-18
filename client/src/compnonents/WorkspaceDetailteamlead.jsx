@@ -3,6 +3,8 @@ import axios from "axios";
 import AssignTeamLead from "./AssignTeamLead";
 import AddUser from "./Addusertoworkspace";
 import DeleteUser from "./Deleteuser";
+import AssignTask from "../pages/AssignTask";
+import WorkspaceTaskList from "./WorkspaceTaskList";
 
 const WorkspaceDetail = ({ workspaceId }) => {
   const [workspace, setWorkspace] = useState(null);
@@ -71,6 +73,15 @@ const WorkspaceDetail = ({ workspaceId }) => {
 
       <div className="mb-4">
         <h3 className="text-xl font-semibold">Tasks</h3>
+        <WorkspaceTaskList workspaceId={workspaceId} />{" "}
+      </div>
+      <div className="mb-4">
+        <h3 className="text-xl font-semibold">Tasks</h3>
+        <AssignTask workspaceId={workspaceId} /> {/* Add WorkspaceTaskList */}
+      </div>
+      {/* 
+      <div className="mb-4">
+        <h3 className="text-xl font-semibold">Tasks</h3>
         {workspace.tasks && workspace.tasks.length > 0 ? (
           <ul className="list-disc list-inside">
             {workspace.tasks.map((task) => (
@@ -82,7 +93,7 @@ const WorkspaceDetail = ({ workspaceId }) => {
         ) : (
           <p>Does not exist yet</p>
         )}
-      </div>
+      </div> */}
 
       <div className="flex justify-end mt-4 space-x-4">
         <button

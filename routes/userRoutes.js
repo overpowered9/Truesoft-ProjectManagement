@@ -11,4 +11,6 @@ router.get(
   decodeTokenMiddleware,
   userController.getallUsersinworkspace
 );
+router.delete("/:userId", adminAuth, userController.deleteUserById);
+
 module.exports = router;

@@ -5,9 +5,10 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button, TextField } from "@mui/material";
+import FireUser from "../compnonents/fireuser";
 
 //taostify
-const notify = () => toast.success("Success");
+const notify = () => toast.success("Success,reload to view changes");
 const notifyerror = () => toast.error("Error Registring, Try Again");
 function handlenotification(newState) {
   newState === 0 ? notify() : notifyerror();
@@ -57,15 +58,12 @@ const SignupPage = () => {
   };
 
   return (
-    <>
+    <div className="overflow-hidden ">
       <ToastContainer />
-      <div className=" w-[100vw] h-[100vh] bg-blue-800  p-[50px]  overflow-hidden flex justify-center flex-col sm:flex-row">
-        <div className="flex w-[100%] h-[50%]  text-cyan-50  justify-center items-center align-middle  sm:flex sm:w-[50%] bg-blue-800 sm:h-[100%]">
-          <p className=" font-sans font-medium text-5xl">Truesoft</p>
-        </div>
+      <div className=" w-[100vw] h-[100vh] bg-blue-800  p-[50px] gap-5 overflow-hidden flex justify-center flex-col sm:flex-row">
         <form
           onSubmit={handleSubmit}
-          className="flex w-[100%] justify-center align-middle items-center flex-col gap-10 bg-white border-r-slate-900 border-gray-950 shadow-lg p-10 sm:w-[50%]"
+          className="flex w-[100%] justify-center align-middle items-center flex-col gap-10 bg-white border-r-slate-900 border-gray-950 shadow-lg p-10 sm:w-[40%]"
         >
           <div className="">
             <TextField
@@ -107,8 +105,9 @@ const SignupPage = () => {
             Register
           </Button>
         </form>
+        <FireUser></FireUser>
       </div>
-    </>
+    </div>
   );
 };
 

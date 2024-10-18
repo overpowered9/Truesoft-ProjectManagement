@@ -15,6 +15,18 @@ const LoginPage = () => {
   function setRole(role) {
     setrole(role);
   }
+  // useEffect(() => {
+  //   const role = localStorage.getItem("Role");
+  //   if (role) {
+  //     if (role === "tm") {
+  //       navigate("/dashboard");
+  //     } else if (role === "admin") {
+  //       navigate("/admindashboard");
+  //     } else {
+  //       navigate("/TLdashboard");
+  //     }
+  //   }
+  // }, [navigate]);
   //taostify
   const notify = () => toast.success("Success");
   const notifyerror = () => toast.error("Invalid Credentials");

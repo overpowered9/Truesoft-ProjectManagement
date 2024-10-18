@@ -9,7 +9,10 @@ const {
   getWorkspace,
   deleteWorkspace,
   getWorkspacesByTeamLead,
+  getWorkspacesForUser,
 } = require("../controllers/workspaceController");
+const taskController = require("../controllers/taskController");
+
 const adminAuth = require("../middleware/middle_admin");
 const decodeTokenMiddleware = require("../middleware/decodeTokenMiddleware");
 
@@ -32,5 +35,13 @@ router.get(
   decodeTokenMiddleware,
   getWorkspacesByTeamLead
 ); // Add this line
+router.get("/user/:userId", decodeTokenMiddleware, getWorkspacesForUser);
+
+// Get tasks for a specific user within a workspace
+router.get(
+  "/workspace/:workspaceId/user/:userId",
+  decodeTokenMiddleware,
+  taskController.getTasksForUserInWorkspace
+);
 
 module.exports = router;

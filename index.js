@@ -4,7 +4,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/route_auth");
 const workspaceRoutes = require("./routes/workspaceRoutes");
 const userRoutes = require("./routes/userRoutes");
-
+const taskRoutes = require("./routes/taskRoutes");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -24,6 +24,7 @@ mongoose
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/workspaces", workspaceRoutes);
+app.use("/api/tasks", taskRoutes);
 
 // Connect to MongoDB
 

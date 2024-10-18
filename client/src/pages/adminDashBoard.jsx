@@ -13,6 +13,10 @@ const AdminDashboard = () => {
   const [selectedWorkspace, setSelectedWorkspace] = useState(null);
   const [accessDenied, setAccessDenied] = useState(false);
 
+  const handleLoginAsOtherPrivilege = () => {
+    navigate("/login");
+  };
+
   useEffect(() => {
     const role = localStorage.getItem("Role");
     if (role !== "admin") {
@@ -84,6 +88,14 @@ const AdminDashboard = () => {
         >
           Manage Users
         </Button>
+      </div>
+      <div className="mt-5 flex justify-center">
+        <button
+          onClick={handleLoginAsOtherPrivilege}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Login as Other Privilege
+        </button>
       </div>
     </div>
   );
