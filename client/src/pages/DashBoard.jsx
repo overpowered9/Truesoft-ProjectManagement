@@ -11,12 +11,7 @@ const Dashboard = () => {
     }
   }, [navigate]);
 
-  return (
-    <div className="bg-black text-teal-50">
-      <h1>Welcome to the Dashboard</h1>
-      <p>This is the home page of the project management application.</p>
-    </div>
-  );
+  return <div className="bg-black text-teal-50">in work</div>;
 };
 
 export default Dashboard;

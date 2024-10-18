@@ -4,7 +4,7 @@ import AssignTeamLead from "./AssignTeamLead";
 import AddUser from "./Addusertoworkspace";
 import DeleteUser from "./Deleteuser";
 
-const WorkspaceDetail = ({ workspaceId }) => {
+const WorkspaceDetailsimple = ({ workspaceId }) => {
   const [workspace, setWorkspace] = useState(null);
   const [showAssignTeamLead, setShowAssignTeamLead] = useState(false);
   const [showAddUser, setShowAddUser] = useState(false);
@@ -83,44 +83,8 @@ const WorkspaceDetail = ({ workspaceId }) => {
           <p>Does not exist yet</p>
         )}
       </div>
-
-      <div className="flex justify-end mt-4 space-x-4">
-        <button
-          onClick={() => setShowAssignTeamLead(!showAssignTeamLead)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Assign Team Lead
-        </button>
-        <button
-          onClick={() => setShowAddUser(!showAddUser)}
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Add Users
-        </button>
-        <button
-          onClick={() => setShowDeleteUser(!showDeleteUser)}
-          className="bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Delete Users
-        </button>
-      </div>
-      {showAssignTeamLead && (
-        <div className="mt-4">
-          <AssignTeamLead workspaceId={workspaceId} onUpdate={handleUpdate} />
-        </div>
-      )}
-      {showAddUser && (
-        <div className="mt-4">
-          <AddUser workspaceId={workspaceId} onUpdate={handleUpdate} />
-        </div>
-      )}
-      {showDeleteUser && (
-        <div className="mt-4">
-          <DeleteUser workspaceId={workspaceId} onUpdate={handleUpdate} />
-        </div>
-      )}
     </div>
   );
 };
 
-export default WorkspaceDetail;
+export default WorkspaceDetailsimple;
