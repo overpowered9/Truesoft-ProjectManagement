@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import CreateWorkspace from "../components/CreateWorkspace";
-import WorkspaceList from "../components/WorkspaceList";
+
 import axios from "axios";
+import CreateWorkspace from "../compnonents/CreateWorkspace";
+import WorkspaceList from "../compnonents/WorkspaceList";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -51,10 +52,10 @@ const AdminDashboard = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-center">Admin Dashboard</h1>
       <div className="mb-6">
-        <CreateWorkspace onWorkspaceCreated={fetchWorkspaces} />
+        <CreateWorkspace onWorkspaceCreated={fetchWorkspaces}></CreateWorkspace>
       </div>
       <div className="mb-6">
-        <WorkspaceList workspaces={workspaces} />
+        <WorkspaceList workspaces={workspaces}></WorkspaceList>
       </div>
       <div className="flex justify-center">
         <Button
