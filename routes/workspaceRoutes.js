@@ -7,6 +7,7 @@ const {
   removeUserFromWorkspace,
   getUserWorkspaces,
   getWorkspace,
+  deleteWorkspace,
 } = require("../controllers/workspaceController");
 const adminAuth = require("../middleware/middle_admin");
 const decodeTokenMiddleware = require("../middleware/decodeTokenMiddleware");
@@ -24,5 +25,6 @@ router.get("/", decodeTokenMiddleware, getUserWorkspaces);
 
 // Get a specific workspace (accessible by all roles assigned to the workspace)
 router.get("/:id", getWorkspace);
+router.delete("/:id", adminAuth, deleteWorkspace);
 
 module.exports = router;

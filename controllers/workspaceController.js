@@ -1,6 +1,6 @@
 const Workspace = require("../models/Workspace");
 const User = require("../models/User");
-
+const Task = require("../models/taskmodel");
 // Create a new workspace
 exports.createWorkspace = async (req, res) => {
   try {
@@ -97,9 +97,9 @@ exports.getUserWorkspaces = async (req, res) => {
 exports.getWorkspace = async (req, res) => {
   try {
     const workspace = await Workspace.findById(req.params.id)
-      .populate("teamLead")
-      .populate("members")
-      .populate("tasks");
+      .populate("teamLead", "name email")
+      .populate("members", "name email")
+      .populate("tasks", "title description");
 
     if (!workspace) {
       return res.status(404).json({ msg: "Workspace not found" });
@@ -107,6 +107,22 @@ exports.getWorkspace = async (req, res) => {
 
     res.status(200).json(workspace);
   } catch (error) {
+    console.error("Error fetching workspace:", error);
+
     res.status(500).json({ msg: "Error fetching workspace" });
+  }
+};
+exports.deleteWorkspace = async (req, res) => {
+  try {
+    const workspace = await Workspace.findByIdAndDelete(req.params.id);
+
+    if (!workspace) {
+      return res.status(404).json({ msg: "Workspace not found" });
+    }
+
+    res.status(200).json({ msg: "Workspace deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting workspace:", error);
+    res.status(500).json({ msg: "Error deleting workspace" });
   }
 };

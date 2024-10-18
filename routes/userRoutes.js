@@ -5,6 +5,10 @@ const userController = require("../controllers/userController");
 
 const decodeTokenMiddleware = require("../middleware/decodeTokenMiddleware");
 
-app.use("/", decodeTokenMiddleware, userController.getallUsers);
-app.use("/:id", decodeTokenMiddleware, userController.getallUsersinworkspace);
+router.get("/", userController.getallUsers);
+router.get(
+  "/:id",
+  decodeTokenMiddleware,
+  userController.getallUsersinworkspace
+);
 module.exports = router;

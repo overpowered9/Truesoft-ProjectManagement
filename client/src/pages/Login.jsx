@@ -6,10 +6,11 @@ import { TextField } from "@mui/material";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [Role, setrole] = useState("team member");
+  const [Role, setrole] = useState("tm");
   const navigate = useNavigate();
   function setRole(role) {
     setrole(role);
@@ -30,11 +31,9 @@ const LoginPage = () => {
       // Assuming the response contains a token, store it in local storage (or context)
       localStorage.setItem("token", response.data.token);
       // Redirect to dashboard or home page after login
-      console.log(localStorage.getItem("token"));
 
       localStorage.setItem("Role", Role);
 
-      console.log(localStorage.getItem("token"));
       Role === "tm" ? navigate("/dashboard") : navigate("/admindashboard");
     } catch (error) {
       handlenotification(1);

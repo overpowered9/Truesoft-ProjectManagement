@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CreateWorkspace from "../compnonents/CreateWorkspace";
 import WorkspaceList from "../compnonents/WorkspaceList";
+import WorkspaceDetail from "../compnonents/WorkspaceDetail";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [workspaces, setWorkspaces] = useState([]);
+  const [selectedWorkspace, setSelectedWorkspace] = useState(null);
   const [accessDenied, setAccessDenied] = useState(false);
 
   useEffect(() => {
@@ -32,6 +34,14 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleWorkspaceSelect = (workspaceId) => {
+    setSelectedWorkspace(workspaceId);
+  };
+
+  useEffect(() => {
+    console.log("Updated Selected Workspace:", selectedWorkspace);
+  }, [selectedWorkspace]);
+
   const handlebuttonclick = () => {
     try {
       navigate("/register");
@@ -52,10 +62,19 @@ const AdminDashboard = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-center">Admin Dashboard</h1>
       <div className="mb-6">
-        <CreateWorkspace onWorkspaceCreated={fetchWorkspaces}></CreateWorkspace>
+        <CreateWorkspace onWorkspaceCreated={fetchWorkspaces} />
       </div>
       <div className="mb-6">
-        <WorkspaceList workspaces={workspaces}></WorkspaceList>
+        <WorkspaceList
+          workspaces={workspaces}
+          onWorkspaceSelect={handleWorkspaceSelect}
+          fetchWorkspaces={fetchWorkspaces}
+        />
+      </div>
+      <div className="mb-6">
+        {selectedWorkspace && (
+          <WorkspaceDetail workspaceId={selectedWorkspace} />
+        )}
       </div>
       <div className="flex justify-center">
         <Button

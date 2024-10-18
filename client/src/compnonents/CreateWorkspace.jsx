@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const CreateWorkspace = ({ onWorkspaceCreated }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
   const notify = () => toast.success("Success");
-  const notifyerror = () => toast.error("Invalid Credentials");
+  const notifyerror = () => toast.error("Invalid ");
   function handlenotification(newState) {
     newState === 0 ? notify() : notifyerror();
   }
@@ -35,7 +36,7 @@ const CreateWorkspace = ({ onWorkspaceCreated }) => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer containerId={"createworkspace"} />
       <form
         onSubmit={handleSubmit}
         className="space-y-4 p-4 bg-white shadow-md rounded-lg"
