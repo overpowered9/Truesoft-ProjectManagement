@@ -1,4 +1,4 @@
-const User = require("../modals/modal_user");
+const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -27,7 +27,7 @@ const register = async (req, res) => {
     res.status(500).json({ msg: "Server Error" });
   }
 };
-//login user using mongodb, current connected db atalas zaidvirk50
+//login user using mongodb, current connected db atlas zaidvirk50
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -52,5 +52,57 @@ const login = async (req, res) => {
     res.status(500).json({ msg: "Server Error" });
   }
 };
+const adminlogin = async (req, res) => {
+  const { email, password } = req.body;
 
-module.exports = { register, login };
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
+
+    const isUserMatch = await bcrypt.compare(password, user.password);
+    if (!isUserMatch) {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
+    if (!user.role === "admin") {
+      return res.status(403).json({ msg: "Access denied" });
+    }
+    const payload = { userId: user.id, role: user.isadmin };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.json({ token });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error" });
+  }
+};
+const leadlogin = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
+
+    const isUserMatch = await bcrypt.compare(password, user.password);
+    if (!isUserMatch) {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
+    if (!user.role === "teamlead") {
+      return res.status(403).json({ msg: "Access denied" });
+    }
+    const payload = { userId: user.id, role: user.isadmin };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.json({ token });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error" });
+  }
+};
+
+module.exports = { register, login, adminlogin, leadlogin };
