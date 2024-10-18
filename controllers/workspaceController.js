@@ -145,7 +145,7 @@ exports.getWorkspacesByTeamLead = async (req, res) => {
 };
 exports.getWorkspacesForUser = async (req, res) => {
   try {
-    const workspaces = await Workspace.find({ members: req.params.userId });
+    const workspaces = await Workspace.find({ members: req.user.userId });
     res.status(200).json(workspaces);
   } catch (error) {
     console.error("Error fetching workspaces for user:", error);

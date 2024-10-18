@@ -78,12 +78,12 @@ exports.getTasksForWorkspace = async (req, res) => {
     res.status(500).json({ msg: "Error fetching tasks for workspace" });
   }
 };
-// Get tasks for a specific user within a workspace
+//
 exports.getTasksForUserInWorkspace = async (req, res) => {
   try {
     const tasks = await Task.find({
       workspace: req.params.workspaceId,
-      assignedTo: req.params.userId,
+      assignedTo: req.user.id,
     });
     res.status(200).json(tasks);
   } catch (error) {

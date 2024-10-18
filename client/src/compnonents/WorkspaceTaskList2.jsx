@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TaskTimer from "./TaskTimer"; // Import TaskTimer component
 
-const WorkspaceTaskList2 = ({ workspaceId, userId }) => {
+const WorkspaceTaskList2 = ({ workspaceId }) => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/workspaces/workspace/${workspaceId}/user/${userId}`,
+          `http://localhost:5000/api/workspaces/workspace/${workspaceId}/user`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -22,7 +22,7 @@ const WorkspaceTaskList2 = ({ workspaceId, userId }) => {
       }
     };
     fetchTasks();
-  }, [workspaceId, userId]);
+  }, [workspaceId]);
 
   return (
     <div className="container mx-auto p-4">

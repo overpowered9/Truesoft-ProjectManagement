@@ -34,8 +34,9 @@ router.get(
   "/team-lead/:userId",
   decodeTokenMiddleware,
   getWorkspacesByTeamLead
-); // Add this line
+);
 router.get("/user/:userId", decodeTokenMiddleware, getWorkspacesForUser);
+router.get("/user", decodeTokenMiddleware, getWorkspacesForUser);
 
 // Get tasks for a specific user within a workspace
 router.get(

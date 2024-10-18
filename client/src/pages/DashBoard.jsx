@@ -5,13 +5,12 @@ import WorkspaceTaskList2 from "../compnonents/WorkspaceTaskList2";
 const TeamMemberDashboard = () => {
   const [workspaces, setWorkspaces] = useState([]);
   const [selectedWorkspace, setSelectedWorkspace] = useState(null);
-  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const fetchWorkspaces = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/workspaces/user/${userId}`,
+          `http://localhost:5000/api/workspaces/`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -24,7 +23,7 @@ const TeamMemberDashboard = () => {
       }
     };
     fetchWorkspaces();
-  }, [userId]);
+  }, []);
 
   const handleWorkspaceSelect = (workspaceId) => {
     setSelectedWorkspace(workspaceId);
@@ -51,7 +50,7 @@ const TeamMemberDashboard = () => {
       </div>
       <div className="mb-6">
         {selectedWorkspace && (
-          <WorkspaceTaskList2 workspaceId={selectedWorkspace} userId={userId} />
+          <WorkspaceTaskList2 workspaceId={selectedWorkspace} />
         )}
       </div>
     </div>
