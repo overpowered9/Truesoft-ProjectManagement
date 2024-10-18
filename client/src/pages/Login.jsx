@@ -34,7 +34,13 @@ const LoginPage = () => {
 
       localStorage.setItem("Role", Role);
 
-      Role === "tm" ? navigate("/dashboard") : navigate("/admindashboard");
+      if (Role === "tm") {
+        navigate("/dashboard");
+      } else if (Role === "admin") {
+        navigate("/admindashboard");
+      } else {
+        navigate("/TLdashboard");
+      }
     } catch (error) {
       handlenotification(1);
       console.error("Login failed:", error);

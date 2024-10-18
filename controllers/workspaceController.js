@@ -126,3 +126,20 @@ exports.deleteWorkspace = async (req, res) => {
     res.status(500).json({ msg: "Error deleting workspace" });
   }
 };
+exports.getWorkspacesByTeamLead = async (req, res) => {
+  try {
+    console.log(req.user.userId);
+    const workspaces = await Workspace.find({ teamLead: req.user.userId });
+    console.log(workspaces);
+    if (!workspaces || workspaces.length === 0) {
+      return res
+        .status(404)
+        .json({ msg: "No workspaces found for this team lead" });
+    }
+
+    res.status(200).json(workspaces);
+  } catch (error) {
+    console.error("Error fetching workspaces by team lead:", error);
+    res.status(500).json({ msg: "Error fetching workspaces by team lead" });
+  }
+};
